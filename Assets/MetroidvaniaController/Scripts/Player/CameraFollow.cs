@@ -27,6 +27,11 @@ public class CameraFollow : MonoBehaviour
 		{
 			camTransform = GetComponent(typeof(Transform)) as Transform;
 		}
+
+		if(Target == null)
+        {
+			Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
+		}
 	}
 
 	void OnEnable()
