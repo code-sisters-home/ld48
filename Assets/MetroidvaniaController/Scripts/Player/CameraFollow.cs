@@ -27,11 +27,6 @@ public class CameraFollow : MonoBehaviour
 		{
 			camTransform = GetComponent(typeof(Transform)) as Transform;
 		}
-
-		if(Target == null)
-        {
-			Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
-		}
 	}
 
 	void OnEnable()
@@ -41,6 +36,11 @@ public class CameraFollow : MonoBehaviour
 
 	private void Update()
 	{
+		if (Target == null)
+		{
+			return;
+		}
+
 		Vector3 newPosition = Target.position;
 		newPosition.z = -10;
 		transform.position = Vector3.Slerp(transform.position, newPosition, FollowSpeed * Time.deltaTime);
