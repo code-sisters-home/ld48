@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
+	[SerializeField] private Animator _animator;
+
 	public float life = 10;
 	private bool isPlat;
 	private bool isObstacle;
@@ -28,7 +30,7 @@ public class Enemy : MonoBehaviour {
 	void FixedUpdate () {
 
 		if (life <= 0) {
-			transform.GetComponent<Animator>().SetBool("IsDead", true);
+			_animator.SetBool("IsDead", true);
 			StartCoroutine(DestroyEnemy());
 		}
 
@@ -70,7 +72,7 @@ public class Enemy : MonoBehaviour {
 		{
 			float direction = damage / Mathf.Abs(damage);
 			damage = Mathf.Abs(damage);
-			transform.GetComponent<Animator>().SetBool("Hit", true);
+			_animator.SetBool("Hit", true);
 			life -= damage;
 			rb.velocity = Vector2.zero;
 			rb.AddForce(new Vector2(direction * 500f, 100f));
