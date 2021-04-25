@@ -1797,6 +1797,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_clock (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3635036791004406055, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635036791004406055, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.11
+      objectReference: {fileID: 0}
     - target: {fileID: 3635382155700134321, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1840,6 +1848,22 @@ PrefabInstance:
     - target: {fileID: 3635382155700134321, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646309176589080043, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646309176589080043, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646309176589080043, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646309176589080043, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
       propertyPath: player
@@ -2238,6 +2262,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_clock
       objectReference: {fileID: 0}
+    - target: {fileID: 3635036791004406055, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635036791004406055, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.11
+      objectReference: {fileID: 0}
     - target: {fileID: 3635382155700134321, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2281,6 +2313,22 @@ PrefabInstance:
     - target: {fileID: 3635382155700134321, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646309176589080043, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646309176589080043, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646309176589080043, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646309176589080043, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
       propertyPath: player
