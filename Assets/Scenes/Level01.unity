@@ -1195,6 +1195,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114435281327171648, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
+      propertyPath: throwableObject
+      value: 
+      objectReference: {fileID: 5532974359214069763, guid: 3acb33fc9dc3db24785fe4df05d6ff85, type: 3}
     - target: {fileID: 199702487371442802, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1205,6 +1209,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
+--- !u!1 &406850876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1377240496476148, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
+  m_PrefabInstance: {fileID: 406850875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &432967375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1832,6 +1841,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 406850876}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: throwableObject
+      value: 
+      objectReference: {fileID: 5532974359214069763, guid: b97a7a993b2768f4eb5afcc627821e6d, type: 3}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: isThrowingObjects
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
 --- !u!1001 &574475317
@@ -2260,6 +2281,18 @@ PrefabInstance:
     - target: {fileID: 3635382155700134321, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 406850876}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: throwableObject
+      value: 
+      objectReference: {fileID: 5532974359214069763, guid: b97a7a993b2768f4eb5afcc627821e6d, type: 3}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: isThrowingObjects
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
