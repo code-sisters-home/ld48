@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public Action OnAllLevelsUnloaded = () => { };
+
     private static SceneLoader _sceneLoader;
     public static SceneLoader Instance => _sceneLoader;
 
-    private int _currentLevel = -1; //it's level's number in name, not a build index!
+    private int _currentLevelPrefix = -1; //it's level's number in name, not a build index! And not a array index;
+
+    public readonly int LARGEST_PREFIX = 4;
 
     private void Awake()
     {
@@ -27,28 +32,28 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadScene("UI"));
     }
 
-    public void LoadLevel(int index)
+    public void LoadLevel(int prefix)
     {
-        if(_currentLevel == index)
+        if(_currentLevelPrefix == prefix)
         {
             return;
         }
 
-        StartCoroutine(LoadScene($"Level0{index}"));
+        StartCoroutine(LoadScene($"Level0{prefix}"));
 
-        _currentLevel = index;
+        _currentLevelPrefix = prefix;
     }
 
     public void UnloadLevel()
     {
-        if(_currentLevel < 0)
+        if(_currentLevelPrefix < 0)
         {
             return;
         }
 
-        StartCoroutine(UnloadScene($"Level0{_currentLevel}"));
+        StartCoroutine(UnloadScene($"Level0{_currentLevelPrefix}"));
 
-        _currentLevel = -1;
+        _currentLevelPrefix = -1;
     }
 
     private IEnumerator LoadScene(string sceneName)
@@ -90,5 +95,31 @@ public class SceneLoader : MonoBehaviour
         }
 
         Resources.UnloadUnusedAssets();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            TryToLoadLevel(_currentLevelPrefix + 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            TryToLoadLevel(_currentLevelPrefix - 1);
+        }
+    }
+
+    private void TryToLoadLevel(int prefix)
+    {
+        if (prefix <= 0 || prefix >= LARGEST_PREFIX)
+        {
+            OnAllLevelsUnloaded();
+        }
+        else
+        {
+            UnloadLevel();
+            LoadLevel(prefix);
+        }
     }
 }
