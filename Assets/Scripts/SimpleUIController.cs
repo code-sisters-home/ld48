@@ -15,7 +15,7 @@ public class SimpleUIController : MonoBehaviour
     [SerializeField] private Button _backButton;
 
 
-    private const float INTROTIMER = 10;
+    private const float INTROTIMER = 13;
 
     private bool _inMenu;
     private bool _inIntro;
