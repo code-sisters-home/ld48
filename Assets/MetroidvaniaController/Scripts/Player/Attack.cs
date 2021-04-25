@@ -12,11 +12,12 @@ public class Attack : MonoBehaviour
 	public bool canAttack = true;
 	public bool isTimeToCheck = false;
 
-	public GameObject cam;
+	private CameraFollow cameraFollow;
 
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		cameraFollow = Camera.main.gameObject.GetComponent<CameraFollow>();
 	}
 
 	// Start is called before the first frame update
@@ -63,7 +64,7 @@ public class Attack : MonoBehaviour
 					dmgValue = -dmgValue;
 				}
 				collidersEnemies[i].gameObject.SendMessage("ApplyDamage", dmgValue);
-				cam.GetComponent<CameraFollow>().ShakeCamera();
+				cameraFollow.ShakeCamera();
 			}
 		}
 	}
