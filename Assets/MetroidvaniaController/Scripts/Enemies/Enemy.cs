@@ -19,13 +19,19 @@ public class Enemy : MonoBehaviour {
 
 	public bool isInvincible = false;
 	private bool isHitted = false;
+	public bool isThrowingObjects = false;
+	public GameObject throwableObject;	
+	public GameObject player;
+
+    private float nextThrowTime = 0.0f;
+    public float throwPeriod = 3.0f;
 
 	void Awake () {
 		fallCheck = transform.Find("FallCheck");
 		wallCheck = transform.Find("WallCheck");
 		rb = GetComponent<Rigidbody2D>();
 	}
-	
+
 	// Update is called once per frame
 	void FixedUpdate () {
 
@@ -39,10 +45,21 @@ public class Enemy : MonoBehaviour {
 
 		if (!isHitted && life > 0 && Mathf.Abs(rb.velocity.y) < 0.5f)
 		{
-			if (isPlat && !isObstacle && !isHitted)
-			{
-				if (facingRight)
-				{
+            if (isPlat && !isObstacle && !isHitted)
+            {
+                if (isThrowingObjects)
+                {
+                    Vector2 playerPos = new Vector2(player.transform.localPosition.x, player.transform.localPosition.y);
+                    Vector2 direction = (playerPos - new Vector2(transform.localPosition.x, transform.localPosition.y)).normalized;
+                    if ((facingRight && direction.x < 0 || !facingRight && direction.x > 0 )&& Time.time > nextThrowTime)
+                    {
+						nextThrowTime = Time.time + throwPeriod;
+                        throwObject(direction);
+						
+                    }
+                }
+                if (facingRight)
+                {
 					rb.velocity = new Vector2(-speed, rb.velocity.y);
 				}
 				else
@@ -108,4 +125,13 @@ public class Enemy : MonoBehaviour {
 		yield return new WaitForSeconds(3f);
 		Destroy(gameObject);
 	}
+	void throwObject(Vector2 direction)
+	{
+		if(!isThrowingObjects)
+		  return;
+
+		GameObject throwableWeapon = Instantiate(throwableObject, transform.position + new Vector3(transform.localScale.x * 0.5f,-0.2f), Quaternion.identity) as GameObject; 
+		throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction; 
+		throwableWeapon.name = "ThrowableWeapon";
+	}	
 }
