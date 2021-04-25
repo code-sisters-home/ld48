@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System;
 
 public class CharacterController2D : MonoBehaviour
 {
+	public Action OnPlayerDied = () => { }; 
+
 	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
@@ -338,6 +341,7 @@ public class CharacterController2D : MonoBehaviour
 		yield return new WaitForSeconds(0.4f);
 		m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);
 		yield return new WaitForSeconds(1.1f);
-		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+
+		OnPlayerDied();
 	}
 }
