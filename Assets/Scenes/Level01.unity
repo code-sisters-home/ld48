@@ -1264,6 +1264,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114435281327171648, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
+      propertyPath: throwableObject
+      value: 
+      objectReference: {fileID: 5532974359214069763, guid: 3acb33fc9dc3db24785fe4df05d6ff85, type: 3}
     - target: {fileID: 199702487371442802, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1901,6 +1905,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1029659646}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: throwableObject
+      value: 
+      objectReference: {fileID: 5532974359214069763, guid: b97a7a993b2768f4eb5afcc627821e6d, type: 3}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: isThrowingObjects
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
 --- !u!1001 &574475317
@@ -2163,6 +2179,11 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1029659646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1377240496476148, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
+  m_PrefabInstance: {fileID: 406850875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1106294711
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,7 +2195,7 @@ GameObject:
   - component: {fileID: 1106294712}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2366,6 +2387,18 @@ PrefabInstance:
     - target: {fileID: 3635382155700134321, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1029659646}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: throwableObject
+      value: 
+      objectReference: {fileID: 5532974359214069763, guid: b97a7a993b2768f4eb5afcc627821e6d, type: 3}
+    - target: {fileID: 3743825425279178713, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
+      propertyPath: isThrowingObjects
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 277f93503c4701740b0bf48b7a22d74c, type: 3}
