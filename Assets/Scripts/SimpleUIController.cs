@@ -8,13 +8,14 @@ public class SimpleUIController : MonoBehaviour
 {
     [SerializeField] private Canvas _psy;
     [SerializeField] private Canvas _intro;
+    [SerializeField] private GameObject _introSound;
     [SerializeField] private Canvas _menu;
     [SerializeField] private Button _start;
     [SerializeField] private Button[] _levels;
     [SerializeField] private Button _backButton;
 
 
-    private const float INTROTIMER = 8;
+    private const float INTROTIMER = 10;
 
     private bool _inMenu;
     private bool _inIntro;
@@ -54,7 +55,9 @@ public class SimpleUIController : MonoBehaviour
 
         _menu.gameObject.SetActive(_inMenu);
         _psy.gameObject.SetActive(_inMenu);
-        _intro.gameObject.SetActive(!_inMenu);
+        _intro.gameObject.SetActive(_inIntro);
+
+        _introSound.GetComponent<AudioSource>().Play();
     }
     private void GoToMenu()
     {
@@ -68,7 +71,7 @@ public class SimpleUIController : MonoBehaviour
 
     private void Update()
     {
-        if (!_inMenu && Input.GetKeyDown(KeyCode.Escape))
+        if (!_inMenu && !_inIntro && Input.GetKeyDown(KeyCode.Escape))
             GoToMenu();
 
         if (_inIntro && _timerIntro <= INTROTIMER)
@@ -77,7 +80,7 @@ public class SimpleUIController : MonoBehaviour
         {
             _inMenu = true;
             _inIntro = false;
-
+            _introSound.GetComponent<AudioSource>().Stop();
             _menu.gameObject.SetActive(_inMenu);
             _intro.gameObject.SetActive(!_inMenu);
 
