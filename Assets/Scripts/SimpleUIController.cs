@@ -39,6 +39,8 @@ public class SimpleUIController : MonoBehaviour
         _start.onClick.AddListener(GoToIntro);
 
         _skipIntroButton.onClick.AddListener(()=> { _inIntro = true; _timerIntro = INTROTIMER; });
+
+        SceneLoader.Instance.OnAllLevelsUnloaded += GoToMenu;
     }
 
     private void GoToLevel(int i)
