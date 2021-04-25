@@ -6,12 +6,12 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyCharOverrideController
+  m_Name: ClockOverrideController
   m_Controller: {fileID: 9100000, guid: 6f0a2ae30419df541a1d62e19f836419, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 462080208a6da2141aa41fcad52a82b7, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 1a2db542e3c489b4cba454bb3704d4df, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 399539813a41a404498a41f18060f7af, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 0bd87dfb5890a204f95daf6be766b962, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 1a2db542e3c489b4cba454bb3704d4df, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 399539813a41a404498a41f18060f7af, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 26a1b23e6af98ce43a5b8844e367f70c, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 1a2db542e3c489b4cba454bb3704d4df, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 399539813a41a404498a41f18060f7af, type: 2}
