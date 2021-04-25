@@ -13,6 +13,7 @@ public class SimpleUIController : MonoBehaviour
     [SerializeField] private Button _start;
     [SerializeField] private Button[] _levels;
     [SerializeField] private Button _backButton;
+    [SerializeField] private Button _skipIntroButton;
 
 
     private const float INTROTIMER = 12;
@@ -36,6 +37,8 @@ public class SimpleUIController : MonoBehaviour
 
         _backButton.onClick.AddListener(GoToMenu);
         _start.onClick.AddListener(GoToIntro);
+
+        _skipIntroButton.onClick.AddListener(()=> { _inIntro = true; _timerIntro = INTROTIMER; });
     }
 
     private void GoToLevel(int i)
@@ -60,6 +63,7 @@ public class SimpleUIController : MonoBehaviour
 
         _introSound.GetComponent<AudioSource>().Play();
     }
+
     private void GoToMenu()
     {
         _inMenu = true;
@@ -89,10 +93,9 @@ public class SimpleUIController : MonoBehaviour
 
             for (int i = 0; i < _levels.Length; i++)
             {
-                var index = i + 1;
                 _levels[i].gameObject.SetActive(_inMenu);
             }
-
+            _skipIntroButton.gameObject.SetActive(false);
         }
     }
 }
