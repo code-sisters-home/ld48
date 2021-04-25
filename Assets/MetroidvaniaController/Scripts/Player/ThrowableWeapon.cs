@@ -37,7 +37,37 @@ public class ThrowableWeapon : MonoBehaviour
 		}
 		else if ((collision.gameObject.tag != "Player") && (collision.gameObject.tag != "Enemy"))
 		{
-			//Destroy(gameObject);
+			Destroy(gameObject);
 		}
+
+        // if (friendly)
+        // {
+        //     if (collision.gameObject.tag == "Enemy")
+        //     {
+        //         collision.gameObject.SendMessage("ApplyDamage", Mathf.Sign(direction.x) * 2f);
+        //         Destroy(gameObject);
+        //         Debug.Log("player hit");
+        //     }
+        //     else if (collision.gameObject.tag != "Player")
+        //     {
+        //         Debug.Log("player else");
+        //         Destroy(gameObject);
+        //     }
+        // }
+        // else
+        // {
+        //     if (collision.gameObject.tag == "Player")
+        //     {
+        //         collision.gameObject.GetComponent<CharacterController2D>().ApplyDamage(2f, transform.position);
+        //         Destroy(gameObject);
+        //         Debug.Log("enemy hit");
+        //     }
+        //     else if (collision.gameObject.tag != "Enemy")
+        //     {
+        //         Debug.Log("enemy else");
+        //         Destroy(gameObject);
+        //     }
+        // }
+
 	}
 }

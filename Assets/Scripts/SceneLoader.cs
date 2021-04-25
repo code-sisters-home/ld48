@@ -32,6 +32,11 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadScene("UI"));
     }
 
+    private void LoadBoss()
+    {
+        StartCoroutine(LoadScene("Boss"));
+    }
+
     public void LoadLevel(int prefix)
     {
         if(_currentLevelPrefix == prefix)
@@ -46,14 +51,21 @@ public class SceneLoader : MonoBehaviour
 
     public void UnloadLevel()
     {
-        if(_currentLevelPrefix < 0)
+        if(SceneManager.GetActiveScene().name.Contains("Boss"))
         {
-            return;
+            StartCoroutine(UnloadScene($"Boss"));
         }
+        else
+        {
+            if(_currentLevelPrefix < 0)
+            {
+                return;
+            }
 
-        StartCoroutine(UnloadScene($"Level0{_currentLevelPrefix}"));
+            StartCoroutine(UnloadScene($"Level0{_currentLevelPrefix}"));
 
-        _currentLevelPrefix = -1;
+            _currentLevelPrefix = -1;
+        }
     }
 
     private IEnumerator LoadScene(string sceneName)
@@ -74,13 +86,14 @@ public class SceneLoader : MonoBehaviour
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
 
-        if(sceneName.Contains("Level"))
+        if(sceneName.Contains("Level") || sceneName.Contains("Boss"))
         {
             Camera.main.GetComponent<CameraFollow>().Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>().OnPlayerDied += ReloadScene;
         }
     }
 
-    private IEnumerator UnloadScene(string sceneName)
+    private IEnumerator UnloadScene(string sceneName, string loadAfter = "")
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("UI"));
 
@@ -95,6 +108,17 @@ public class SceneLoader : MonoBehaviour
         }
 
         Resources.UnloadUnusedAssets();
+
+        yield return null;
+
+        if (!string.IsNullOrEmpty(loadAfter))
+            StartCoroutine(LoadScene(loadAfter));
+    }
+
+    private void ReloadScene()
+    {
+        var sceneName = SceneManager.GetActiveScene().name;
+        StartCoroutine(UnloadScene(sceneName, sceneName));
     }
 
     private void Update()
@@ -114,7 +138,15 @@ public class SceneLoader : MonoBehaviour
     {
         if (prefix <= 0 || prefix >= LARGEST_PREFIX)
         {
-            OnAllLevelsUnloaded();
+            if(prefix == LARGEST_PREFIX)
+            {
+                UnloadLevel();
+                LoadBoss();
+            }
+            else
+            { 
+                OnAllLevelsUnloaded();
+            }
         }
         else
         {
