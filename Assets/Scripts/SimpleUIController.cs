@@ -15,7 +15,7 @@ public class SimpleUIController : MonoBehaviour
     [SerializeField] private Button _backButton;
 
 
-    private const float INTROTIMER = 13;
+    private const float INTROTIMER = 12;
 
     private bool _inMenu;
     private bool _inIntro;
@@ -41,6 +41,7 @@ public class SimpleUIController : MonoBehaviour
     private void GoToLevel(int i)
     {
         _inMenu = false;
+        _introSound.GetComponent<AudioSource>().Stop();
 
         _menu.gameObject.SetActive(_inMenu);
         _psy.gameObject.SetActive(!_inMenu);
@@ -80,7 +81,7 @@ public class SimpleUIController : MonoBehaviour
         {
             _inMenu = true;
             _inIntro = false;
-            _introSound.GetComponent<AudioSource>().Stop();
+            
             _menu.gameObject.SetActive(_inMenu);
             _intro.gameObject.SetActive(!_inMenu);
 
