@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8f323ffc15f6a49ad35d77df50a4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tag: Boss
   _enemyPrefab: {fileID: 1366918459}
   _count: 1
   _timerMin: 1
