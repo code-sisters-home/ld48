@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - CameraFollowTarget
+  - Enemy
+  - Wall
+  - Platform
   layers:
   - Default
   - TransparentFX
