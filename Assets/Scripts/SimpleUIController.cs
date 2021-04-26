@@ -16,9 +16,14 @@ public class SimpleUIController : MonoBehaviour, IController
     [SerializeField] private Button _start;
     [SerializeField] private Button[] _levels;
     [SerializeField] private Button _backButton;
+    [SerializeField] private GameObject _headerPanel;
+    [SerializeField] private GameObject _Bubble;
+    [SerializeField] private GameObject _Psycho;
+    [SerializeField] private Button _questionButton;
     [SerializeField] private Button _skipIntroButton;
     [SerializeField] private Button _TutorialButton;
     [SerializeField] private GameObject[] _dialogs;
+    [SerializeField] private GameObject _tutorial;
 
     private const float INTROTIMER = 12;
 
@@ -45,6 +50,7 @@ public class SimpleUIController : MonoBehaviour, IController
         _start.onClick.AddListener(GoToIntro);
 
         _TutorialButton.onClick.AddListener(GoToTutorial);
+        _questionButton.onClick.AddListener(ShowOrHideTutorial);
 
         _skipIntroButton.onClick.AddListener(()=> { _inIntro = true; _timerIntro = INTROTIMER; });
 
@@ -62,6 +68,12 @@ public class SimpleUIController : MonoBehaviour, IController
 
         _menu.gameObject.SetActive(_inMenu);
         _psy.gameObject.SetActive(!_inMenu);
+        _questionButton.gameObject.SetActive(!_inMenu);
+        _tutorial.SetActive(_inMenu);
+        _headerPanel.SetActive(!_inMenu);
+        _backButton.gameObject.SetActive(!_inMenu);
+        _Bubble.SetActive(!_inMenu);
+        _Psycho.SetActive(!_inMenu);
 
         SceneLoader.Instance.LoadLevel(i);
     }
@@ -107,8 +119,18 @@ public class SimpleUIController : MonoBehaviour, IController
 
         _menu.gameObject.SetActive(_inMenu);
         _psy.gameObject.SetActive(!_inMenu);
+        _questionButton.gameObject.SetActive(_inMenu);
+        _tutorial.SetActive(_inMenu);
+        _headerPanel.SetActive(_inMenu);
+        _Bubble.SetActive(_inMenu);
+        _Psycho.SetActive(_inMenu);
 
         SceneLoader.Instance.LoadTutorial();
+    }
+
+    private void ShowOrHideTutorial()
+    {
+        _tutorial.SetActive(!_tutorial.activeSelf);
     }
 
     private void Update()
@@ -132,6 +154,7 @@ public class SimpleUIController : MonoBehaviour, IController
             {
                 _levels[i].gameObject.SetActive(_inMenu);
             }
+            _TutorialButton.gameObject.SetActive(_inMenu);
             _skipIntroButton.gameObject.SetActive(false);
         }
     }
