@@ -42,17 +42,17 @@ public class SpawnPoint : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        var enemy = Instantiate(_enemyPrefab, transform);
+        var enemy = Instantiate(_enemyPrefab);
         enemy.enabled = false;
-        enemy.transform.localPosition = Vector3.zero;
-        enemy.transform.localScale = Vector3.one;
+        enemy.transform.position = transform.position;
+        //enemy.transform.localScale = Vector3.one;
         enemy.gameObject.SetActive(true);
         enemy.OnDead += CheckCompletion;
 
         yield return new WaitForEndOfFrame();
         yield return new WaitForFixedUpdate();
 
-        enemy.GetComponent<Rigidbody2D>().AddForce(transform.forward * 5f, ForceMode2D.Impulse);
+        enemy.GetComponent<Rigidbody2D>().AddForce(transform.up * 5f, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(1);
 

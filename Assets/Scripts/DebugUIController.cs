@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DebugUIController : MonoBehaviour, IController
 {
+    public CameraFollow _cam;
+
     public void NotifyOnSpawned(int id) { }
 
     public void SubscribeSpawnPoint(SpawnPoint spawnPoint) { }
@@ -10,6 +12,6 @@ public class DebugUIController : MonoBehaviour, IController
 
     private void Awake()
     {
-        Camera.main.GetComponent<CameraFollow>().Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
+        _cam.Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
     }
 }
