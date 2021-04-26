@@ -10125,6 +10125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2676270368391415226}
+  - component: {fileID: 6421016554221058197}
   m_Layer: 3
   m_Name: _cameraFollowTarget
   m_TagString: CameraFollowTarget
@@ -10146,3 +10147,15 @@ Transform:
   m_Father: {fileID: 4660076192433278}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6421016554221058197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596234238641864001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0889939d9084a1458fc061527586d8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

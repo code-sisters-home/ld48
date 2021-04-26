@@ -98,20 +98,14 @@ public class SceneLoader : MonoBehaviour
 
         if(sceneName.Contains("Level"))
         {
-            Camera.main.GetComponent<CameraFollow>().Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
             GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>().OnPlayerDied += ReloadScene;
         }
         if(sceneName.Contains("Boss"))
         {
-            Camera.main.GetComponent<CameraFollow>().Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
             GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>().OnPlayerDied += () => 
             {
                 SimpleUIController.Instance.ShowLoseWin(false);
             };
-        }
-        if (sceneName.Contains("Tutorial"))
-        {
-            Camera.main.GetComponent<CameraFollow>().Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
         }
     }
 
