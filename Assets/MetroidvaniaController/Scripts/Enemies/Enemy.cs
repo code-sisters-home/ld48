@@ -104,6 +104,10 @@ public class Enemy : MonoBehaviour {
 		{
 			collision.gameObject.GetComponent<CharacterController2D>().ApplyDamage(2f, transform.position);
 		}
+		if (collision.gameObject.tag != "Player")
+		{
+			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2( transform.position.x * (-1), transform.position.y * (-1)));
+		}
 	}
 
 	IEnumerator HitTime()

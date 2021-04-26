@@ -6,6 +6,7 @@ public class SpawnPoint : MonoBehaviour
 {
     [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private int _count = 1;
+    [SerializeField] private float _timer = 10.0f;
 
     private void Awake()
     {
@@ -17,7 +18,7 @@ public class SpawnPoint : MonoBehaviour
         for (int i = 0; i < _count; i++)
         {
             //var random = new System.Random();
-            StartCoroutine(Spawn(Random.Range(0f, 3f)));
+            StartCoroutine(Spawn(Random.Range(0f, _timer)));
         }
     }
 
@@ -36,7 +37,7 @@ public class SpawnPoint : MonoBehaviour
 
         enemy.GetComponent<Rigidbody2D>().AddForce(transform.forward * 5f, ForceMode2D.Impulse);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1);
 
         enemy.enabled = true;
     }
