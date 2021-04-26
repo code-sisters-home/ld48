@@ -141,6 +141,8 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(UnloadScene(sceneName, sceneName));
     }
 
+
+#if UNITY_EDITOR
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Tab))
@@ -153,6 +155,8 @@ public class SceneLoader : MonoBehaviour
             TryToLoadLevel(_currentLevelPrefix - 1);
         }
     }
+
+#endif
 
     public void Next()
     {
