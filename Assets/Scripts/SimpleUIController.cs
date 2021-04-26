@@ -25,7 +25,7 @@ public class SimpleUIController : MonoBehaviour, IController
     [SerializeField] private GameObject _headerPanel;
    //[SerializeField] private GameObject GameObject _Bubble;;
     [SerializeField] private GameObject _Psycho;
-    [SerializeField] private Button _questionButton;
+    [SerializeField] private GameObject _questionButton;
     [SerializeField] private Button _skipIntroButton;
     [SerializeField] private Button _TutorialButton;
     [SerializeField] private GameObject[] _dialogs;
@@ -67,7 +67,6 @@ public class SimpleUIController : MonoBehaviour, IController
         _start.onClick.AddListener(GoToIntro);
 
         _TutorialButton.onClick.AddListener(GoToTutorial);
-        _questionButton.onClick.AddListener(ShowOrHideTutorial);
 
         _skipIntroButton.onClick.AddListener(()=> { _inIntro = true; _timerIntro = INTROTIMER; });
 
@@ -151,7 +150,7 @@ public class SimpleUIController : MonoBehaviour, IController
         SceneLoader.Instance.LoadTutorial();
     }
 
-    private void ShowOrHideTutorial()
+    public void ShowOrHideTutorial()
     {
         _tutorial.SetActive(!_tutorial.activeSelf);
     }
