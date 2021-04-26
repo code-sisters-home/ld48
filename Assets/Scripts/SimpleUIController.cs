@@ -17,7 +17,7 @@ public class SimpleUIController : MonoBehaviour, IController
     [SerializeField] private Button[] _levels;
     [SerializeField] private Button _backButton;
     [SerializeField] private GameObject _headerPanel;
-    [SerializeField] private GameObject _Bubble;
+   //[SerializeField] private GameObject GameObject _Bubble;;
     [SerializeField] private GameObject _Psycho;
     [SerializeField] private Button _questionButton;
     [SerializeField] private Button _skipIntroButton;
@@ -72,7 +72,6 @@ public class SimpleUIController : MonoBehaviour, IController
         _tutorial.SetActive(_inMenu);
         _headerPanel.SetActive(!_inMenu);
         _backButton.gameObject.SetActive(!_inMenu);
-        _Bubble.SetActive(!_inMenu);
         _Psycho.SetActive(!_inMenu);
 
         SceneLoader.Instance.LoadLevel(i);
@@ -122,7 +121,11 @@ public class SimpleUIController : MonoBehaviour, IController
         _questionButton.gameObject.SetActive(_inMenu);
         _tutorial.SetActive(_inMenu);
         _headerPanel.SetActive(_inMenu);
-        _Bubble.SetActive(_inMenu);
+        //  _Bubble.SetActive(_inMenu);
+        for (int i = 0; i < _dialogs.Length; i++)
+        {
+            _dialogs[i].SetActive(false);
+        }
         _Psycho.SetActive(_inMenu);
 
         SceneLoader.Instance.LoadTutorial();
