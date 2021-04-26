@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
+    [SerializeField] private string _tag = "";
     [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private int _count = 1;
     [SerializeField] private float _timerMin = 1.0f;
     [SerializeField] private float _timerMax = 3.0f;
 
     public int Count => _count;
+    public string Tag => _tag;
     private int _deadEnemies = 0;
 
     private IController _uiController;

@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public Action OnAllLevelsUnloaded = () => { };
-
     public Action OnSpawned = () => { };
 
     private static SceneLoader _sceneLoader;
@@ -97,10 +96,18 @@ public class SceneLoader : MonoBehaviour
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
 
-        if(sceneName.Contains("Level") || sceneName.Contains("Boss"))
+        if(sceneName.Contains("Level"))
         {
             Camera.main.GetComponent<CameraFollow>().Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
             GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>().OnPlayerDied += ReloadScene;
+        }
+        if(sceneName.Contains("Boss"))
+        {
+            Camera.main.GetComponent<CameraFollow>().Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>().OnPlayerDied += () => 
+            {
+                SimpleUIController.Instance.ShowLoseWin(false);
+            };
         }
         if (sceneName.Contains("Tutorial"))
         {
@@ -134,6 +141,8 @@ public class SceneLoader : MonoBehaviour
 
     private void ReloadScene()
     {
+        SimpleUIController.Instance.ClearSpawnPoints();
+
         var sceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(UnloadScene(sceneName, sceneName));
     }
@@ -158,6 +167,8 @@ public class SceneLoader : MonoBehaviour
 
     private void TryToLoadLevel(int prefix)
     {
+        SimpleUIController.Instance.ClearSpawnPoints();
+
         if (prefix <= 0 || prefix >= LARGEST_PREFIX)
         {
             if(prefix == LARGEST_PREFIX)

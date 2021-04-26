@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class SimpleUIController : MonoBehaviour, IController
 {
@@ -13,6 +14,11 @@ public class SimpleUIController : MonoBehaviour, IController
     [SerializeField] private Canvas _intro;
     [SerializeField] private GameObject _introSound;
     [SerializeField] private Canvas _menu;
+    [SerializeField] private Canvas _loseWin;
+    [SerializeField] private Animator _loseWinAnimator;
+    [SerializeField] private Image _loseImg;
+    [SerializeField] private Image _winImg;
+    [SerializeField] private TextMeshProUGUI _loseWinTxt;
     [SerializeField] private Button _start;
     [SerializeField] private Button[] _levels;
     [SerializeField] private Button _backButton;
@@ -25,6 +31,9 @@ public class SimpleUIController : MonoBehaviour, IController
     [SerializeField] private GameObject[] _dialogs;
     [SerializeField] private GameObject _tutorial;
 
+    private static SimpleUIController _ui;
+    public static SimpleUIController Instance => _ui;
+
     private const float INTROTIMER = 12;
 
     private bool _inMenu;
@@ -32,13 +41,21 @@ public class SimpleUIController : MonoBehaviour, IController
 
     private float _timerIntro;
 
-    private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>(); //active on current level
+    public List<SpawnPoint> _spawnPoints = new List<SpawnPoint>(); //active on current level
 
     private void Awake()
     {
+        if (_ui != null)
+        {
+            Destroy(_ui);
+        }
+        _ui = this;
+        DontDestroyOnLoad(this);
+
         _timerIntro = 0.0f;
         _menu.gameObject.SetActive(true);
         _psy.gameObject.SetActive(false);
+        _loseWin.gameObject.SetActive(false);
 
         for (int i = 0; i < _levels.Length; i++)
         {
@@ -74,6 +91,8 @@ public class SimpleUIController : MonoBehaviour, IController
         _backButton.gameObject.SetActive(!_inMenu);
         _Psycho.SetActive(!_inMenu);
 
+        _spawnPoints.Clear();
+
         SceneLoader.Instance.LoadLevel(i);
     }
 
@@ -106,6 +125,7 @@ public class SimpleUIController : MonoBehaviour, IController
 
         _menu.gameObject.SetActive(_inMenu);
         _psy.gameObject.SetActive(!_inMenu);
+        _loseWin.gameObject.SetActive(false);
 
         _spawnPoints.Clear();
 
@@ -169,18 +189,71 @@ public class SimpleUIController : MonoBehaviour, IController
 
     public void UnsubscribeSpawnPoint(SpawnPoint spawnPoint)
     {
+        var tag = spawnPoint.Tag;
         _spawnPoints.Remove(spawnPoint);
 
         if (_spawnPoints.Count == 0)
         {
             _spawnPoints.Clear();
-            SceneLoader.Instance.Next();
+
+            if (tag.Contains("Boss"))
+            {
+                ShowLoseWin(true);
+            }
+            else
+            {
+                SceneLoader.Instance.Next();
+            }
         }
     }
 
     public void NotifyOnSpawned(int id)
     {
         OnSpawned(id);
+    }
+
+    public void ShowLoseWin(bool isWin)
+    {
+        GoToMenu();
+
+        StartCoroutine(DoShow(isWin));
+    }
+
+    private IEnumerator DoShow(bool isWin)
+    {
+        _spawnPoints.Clear();
+
+        _loseWinAnimator.enabled = false;
+        _loseWin.gameObject.SetActive(true);
+        _winImg.enabled = isWin;
+        _loseImg.enabled = !isWin;
+
+        if (isWin)
+        {
+            _loseWinTxt.SetText("Oh darn, I was counting on 5 more paid sessions.I have a mortgage too!");
+        }
+        else
+        {
+            _loseWinTxt.SetText("Take it easy. We’re making progress! At least you can get 10% off next session");
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        _winImg.enabled = false;
+        _loseImg.enabled = false;
+
+        _loseWinAnimator.enabled = true;
+        _loseWinAnimator.Play("Intro");
+
+        yield return new WaitForSeconds(4f);
+
+        _loseWinAnimator.enabled = false;
+        _loseWin.gameObject.SetActive(false);
+    }
+
+    public void ClearSpawnPoints()
+    {
+        _spawnPoints.Clear();
     }
 }
 
