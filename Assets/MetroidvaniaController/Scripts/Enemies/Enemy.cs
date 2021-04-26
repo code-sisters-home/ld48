@@ -1,7 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class Enemy : MonoBehaviour {
+
+	public Action OnDead = () => {};
 
 	[SerializeField] private Animator _animator;
 
@@ -33,12 +36,14 @@ public class Enemy : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 	}
 
+	Coroutine _deathProcess;
 	// Update is called once per frame
 	void FixedUpdate () {
 
 		if (life <= 0) {
-			_animator.SetBool("IsDead", true);
-			StartCoroutine(DestroyEnemy());
+            _animator.SetBool("IsDead", true);
+			if(_deathProcess == null)
+				_deathProcess = StartCoroutine(DestroyEnemy());
 		}
 
 		isPlat = Physics2D.OverlapCircle(fallCheck.position, .2f, 1 << LayerMask.NameToLayer("Default"));
@@ -123,13 +128,16 @@ public class Enemy : MonoBehaviour {
 
 	IEnumerator DestroyEnemy()
 	{
+		OnDead();
 		CapsuleCollider2D capsule = GetComponent<CapsuleCollider2D>();
 		capsule.size = new Vector2(1f, 0.25f);
 		capsule.offset = new Vector2(0f, -0.8f);
 		capsule.direction = CapsuleDirection2D.Horizontal;
 		yield return new WaitForSeconds(0.25f);
 		rb.velocity = new Vector2(0, rb.velocity.y);
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(0.5f);
+
+		_deathProcess = null;
 		Destroy(gameObject);
 	}
 	void throwObject(Vector2 direction, Vector3 weaponShift)

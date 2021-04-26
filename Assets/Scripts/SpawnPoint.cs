@@ -7,27 +7,39 @@ public class SpawnPoint : MonoBehaviour
 {
     [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private int _count = 1;
-    [SerializeField] private float _timer = 10.0f;
+    [SerializeField] private float _timerMin = 1.0f;
+    [SerializeField] private float _timerMax = 3.0f;
 
-    private SimpleUIController _uiController;
+    public int Count => _count;
+    private int _deadEnemies = 0;
+
+    private IController _uiController;
 
     private void Awake()
     {
-        _uiController = GameObject.Find("SimpleUIController").GetComponent<SimpleUIController>();
+        _uiController = GameObject.Find("SimpleUIController").GetComponent<IController>();
         _enemyPrefab.gameObject.SetActive(false);
+
+        _uiController.SubscribeSpawnPoint(this);
     }
+
     private void OnEnable()
     {
         for (int i = 0; i < _count; i++)
         {
-            //var random = new System.Random();
-            StartCoroutine(Spawn(UnityEngine.Random.Range(8.0f, _timer)));
+            StartCoroutine(Spawn());
         }
     }
 
-    private IEnumerator Spawn(float delay)
+    private IEnumerator Spawn()
     {
-        Debug.Log(delay);
+        yield return new WaitForSeconds(0.1f);
+
+        StartCoroutine(DoSpawn(UnityEngine.Random.Range(_timerMin, _timerMax)));
+    }
+
+    private IEnumerator DoSpawn(float delay)
+    {
         yield return new WaitForSeconds(delay);
 
         var enemy = Instantiate(_enemyPrefab, transform);
@@ -35,7 +47,9 @@ public class SpawnPoint : MonoBehaviour
         enemy.transform.localPosition = Vector3.zero;
         enemy.transform.localScale = Vector3.one;
         enemy.gameObject.SetActive(true);
+        enemy.OnDead += CheckCompletion;
 
+        yield return new WaitForEndOfFrame();
         yield return new WaitForFixedUpdate();
 
         enemy.GetComponent<Rigidbody2D>().AddForce(transform.forward * 5f, ForceMode2D.Impulse);
@@ -61,7 +75,18 @@ public class SpawnPoint : MonoBehaviour
                 dialog_id = 6;
             if (_enemyPrefab.name == "Boss")
                 dialog_id = 7;
-            _uiController.OnSpawned(dialog_id);
+            _uiController.NotifyOnSpawned(dialog_id);
+        }
+    }
+
+    private void CheckCompletion()
+    {
+        _deadEnemies += 1;
+
+        if (_count <= _deadEnemies)
+        {
+            _deadEnemies = 0;
+            _uiController.UnsubscribeSpawnPoint(this);
         }
     }
 }

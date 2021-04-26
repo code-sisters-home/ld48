@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SimpleUIController : MonoBehaviour
+public class SimpleUIController : MonoBehaviour, IController
 {
     public Action<int> OnSpawned;
 
@@ -26,6 +26,8 @@ public class SimpleUIController : MonoBehaviour
     private bool _inIntro;
 
     private float _timerIntro;
+
+    private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>(); //active on current level
 
     private void Awake()
     {
@@ -94,6 +96,8 @@ public class SimpleUIController : MonoBehaviour
         _menu.gameObject.SetActive(_inMenu);
         _psy.gameObject.SetActive(!_inMenu);
 
+        _spawnPoints.Clear();
+
         SceneLoader.Instance.UnloadLevel();
     }
 
@@ -131,4 +135,32 @@ public class SimpleUIController : MonoBehaviour
             _skipIntroButton.gameObject.SetActive(false);
         }
     }
+
+    public void SubscribeSpawnPoint(SpawnPoint spawnPoint)
+    {
+        _spawnPoints.Add(spawnPoint);
+    }
+
+    public void UnsubscribeSpawnPoint(SpawnPoint spawnPoint)
+    {
+        _spawnPoints.Remove(spawnPoint);
+
+        if (_spawnPoints.Count == 0)
+        {
+            _spawnPoints.Clear();
+            SceneLoader.Instance.Next();
+        }
+    }
+
+    public void NotifyOnSpawned(int id)
+    {
+        OnSpawned(id);
+    }
+}
+
+public interface IController 
+{
+    void NotifyOnSpawned(int id);
+    void SubscribeSpawnPoint(SpawnPoint spawnPoint);
+    void UnsubscribeSpawnPoint(SpawnPoint spawnPoint);
 }

@@ -110,6 +110,8 @@ public class SceneLoader : MonoBehaviour
 
     private IEnumerator UnloadScene(string sceneName, string loadAfter = "")
     {
+        yield return new WaitForEndOfFrame();
+
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("UI"));
 
         AsyncOperation operation = SceneManager.UnloadSceneAsync($"Scenes/{sceneName}");
@@ -147,6 +149,11 @@ public class SceneLoader : MonoBehaviour
         {
             TryToLoadLevel(_currentLevelPrefix - 1);
         }
+    }
+
+    public void Next()
+    {
+        TryToLoadLevel(_currentLevelPrefix + 1);
     }
 
     private void TryToLoadLevel(int prefix)
