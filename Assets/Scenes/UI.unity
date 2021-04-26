@@ -904,7 +904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &288050942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7138,6 +7138,17 @@ MonoBehaviour:
   _backButton: {fileID: 303093612}
   _skipIntroButton: {fileID: 5614656}
   _TutorialButton: {fileID: 2129901518}
+  _dialogs:
+  - {fileID: 220343046}
+  - {fileID: 1324887733}
+  - {fileID: 314873992}
+  - {fileID: 1357070862}
+  - {fileID: 383463286}
+  - {fileID: 2074737208}
+  - {fileID: 1698777250}
+  - {fileID: 528047247}
+  - {fileID: 943378444}
+  - {fileID: 416478500}
 --- !u!4 &2096982068
 Transform:
   m_ObjectHideFlags: 0

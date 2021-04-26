@@ -8,6 +8,8 @@ public class SceneLoader : MonoBehaviour
 {
     public Action OnAllLevelsUnloaded = () => { };
 
+    public Action OnSpawned = () => { };
+
     private static SceneLoader _sceneLoader;
     public static SceneLoader Instance => _sceneLoader;
 

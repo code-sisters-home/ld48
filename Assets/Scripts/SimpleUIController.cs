@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 
 public class SimpleUIController : MonoBehaviour
 {
+    public Action<int> OnSpawned;
+
     [SerializeField] private Canvas _psy;
     [SerializeField] private Canvas _intro;
     [SerializeField] private GameObject _introSound;
@@ -15,7 +18,7 @@ public class SimpleUIController : MonoBehaviour
     [SerializeField] private Button _backButton;
     [SerializeField] private Button _skipIntroButton;
     [SerializeField] private Button _TutorialButton;
-
+    [SerializeField] private GameObject[] _dialogs;
 
     private const float INTROTIMER = 12;
 
@@ -44,6 +47,10 @@ public class SimpleUIController : MonoBehaviour
         _skipIntroButton.onClick.AddListener(()=> { _inIntro = true; _timerIntro = INTROTIMER; });
 
         SceneLoader.Instance.OnAllLevelsUnloaded += GoToMenu;
+
+        OnSpawned += (index) => {
+            ShowDialog(index);
+        };
     }
 
     private void GoToLevel(int i)
@@ -68,7 +75,17 @@ public class SimpleUIController : MonoBehaviour
 
         _introSound.GetComponent<AudioSource>().Play();
     }
-
+    private void ShowDialog(int index)
+    {
+        //hide other dialogs
+        for (int i = 0; i < _levels.Length; i++)
+        {
+            _dialogs[i].SetActive(false);
+        }
+        //show dialog by index
+        _dialogs[index].SetActive(true);
+    }
+    
     private void GoToMenu()
     {
         _inMenu = true;
