@@ -262,6 +262,10 @@ PrefabInstance:
       propertyPath: _animator
       value: 
       objectReference: {fileID: 6215342136754245125}
+    - target: {fileID: 114841737010993260, guid: 061600cc71b08b947a704a7416146101, type: 3}
+      propertyPath: throwableObject
+      value: 
+      objectReference: {fileID: 5532974359214069763, guid: c928b20c45c6dcd458c1b9a8c6226d54, type: 3}
     - target: {fileID: 212746456417141244, guid: 061600cc71b08b947a704a7416146101, type: 3}
       propertyPath: m_Sprite
       value: 
