@@ -51,11 +51,12 @@ public class Enemy : MonoBehaviour {
                 if (isThrowingObjects)
                 {
                     Vector2 playerPos = new Vector2(player.transform.localPosition.x, player.transform.localPosition.y);
-                    Vector2 direction = (playerPos - new Vector2(transform.localPosition.x, transform.localPosition.y)).normalized;
+					Vector2 weaponShift = new Vector2(0, weaponShiftY);
+                    Vector2 direction = (playerPos - weaponShift - new Vector2(transform.localPosition.x, transform.localPosition.y)).normalized;
                     if ((facingRight && direction.x < 0 || !facingRight && direction.x > 0 )&& Time.time > nextThrowTime)
                     {
 						nextThrowTime = Time.time + throwPeriod;
-                        throwObject(direction);
+                        throwObject(direction, new Vector3(weaponShift.x, weaponShift.y, 0));
 						
                     }
                 }
@@ -130,13 +131,20 @@ public class Enemy : MonoBehaviour {
 		yield return new WaitForSeconds(3f);
 		Destroy(gameObject);
 	}
-	void throwObject(Vector2 direction)
+	void throwObject(Vector2 direction, Vector3 weaponShift)
 	{
 		if(!isThrowingObjects)
 		  return;
-		Vector3 weaponShift = new Vector3(0, weaponShiftY, 0);
-		GameObject throwableWeapon = Instantiate(throwableObject, transform.position + weaponShift + new Vector3(transform.localScale.x * 0.5f,-0.2f), Quaternion.identity) as GameObject; 
+		GameObject throwableWeapon = Instantiate(throwableObject, transform.position + weaponShift + new Vector3(transform.localScale.x * 0.5f,-0.2f), Quaternion.identity) as GameObject;
+
+        if (direction.x > 0)
+        {
+            Vector3 theScale = throwableWeapon.transform.localScale;
+            theScale.x *= -1;
+            throwableWeapon.transform.localScale = theScale;
+        }
 		throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction; 
+		throwableWeapon.transform.Rotate(new Vector3(0, 0, 1), Mathf.Sign(direction.x)*Mathf.Asin(direction.y)*Mathf.Rad2Deg);
 		throwableWeapon.name = "ThrowableWeapon";
 	}	
 }
