@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour {
 	public bool isInvincible = false;
 	private bool isHitted = false;
 	public bool isThrowingObjects = false;
+	public float weaponShiftY = 0f;
 	public GameObject throwableObject;	
 	public GameObject player;
 
@@ -129,8 +130,8 @@ public class Enemy : MonoBehaviour {
 	{
 		if(!isThrowingObjects)
 		  return;
-
-		GameObject throwableWeapon = Instantiate(throwableObject, transform.position + new Vector3(transform.localScale.x * 0.5f,-0.2f), Quaternion.identity) as GameObject; 
+		Vector3 weaponShift = new Vector3(0, weaponShiftY, 0);
+		GameObject throwableWeapon = Instantiate(throwableObject, transform.position + weaponShift + new Vector3(transform.localScale.x * 0.5f,-0.2f), Quaternion.identity) as GameObject; 
 		throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction; 
 		throwableWeapon.name = "ThrowableWeapon";
 	}	
