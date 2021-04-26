@@ -49,11 +49,20 @@ public class SceneLoader : MonoBehaviour
         _currentLevelPrefix = prefix;
     }
 
+    public void LoadTutorial()
+    {
+        StartCoroutine(LoadScene("Tutorial"));
+    }
+
     public void UnloadLevel()
     {
         if(SceneManager.GetActiveScene().name.Contains("Boss"))
         {
             StartCoroutine(UnloadScene($"Boss"));
+        }
+        else if (SceneManager.GetActiveScene().name.Contains("Tutorial"))
+        {
+            StartCoroutine(UnloadScene($"Tutorial"));
         }
         else
         {
@@ -90,6 +99,10 @@ public class SceneLoader : MonoBehaviour
         {
             Camera.main.GetComponent<CameraFollow>().Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
             GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>().OnPlayerDied += ReloadScene;
+        }
+        if (sceneName.Contains("Tutorial"))
+        {
+            Camera.main.GetComponent<CameraFollow>().Target = GameObject.FindGameObjectWithTag("CameraFollowTarget").transform;
         }
     }
 
