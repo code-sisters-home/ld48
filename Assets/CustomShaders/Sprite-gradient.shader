@@ -50,7 +50,7 @@ Shader "Sprites-gradient"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                return lerp(_Color1, _Color2, i.uv.y);
+                return lerp(_Color1, _Color2, i.uv.y*(_SinTime*0.5+0.5));
             }
             ENDCG
         }
