@@ -110,12 +110,17 @@ public class Enemy : MonoBehaviour {
 		{
 			collision.gameObject.GetComponent<CharacterController2D>().ApplyDamage(2f, transform.position);
 		}
+		
+	}
+	void OnCollisionEnter2D(Collision2D collision)
+	{
 		if (collision.gameObject.tag != "Player")
 		//if ((collision.gameObject.tag == "Wall") || (collision.gameObject.tag == "Platform"))
 		{
-			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2( transform.position.x * (-1), transform.position.y * (-1)));
+			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(transform.position.x * (-1), transform.position.y * (-1)));
 		}
 	}
+
 
 	IEnumerator HitTime()
 	{
