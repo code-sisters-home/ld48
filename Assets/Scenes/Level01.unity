@@ -1147,6 +1147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DrawCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 1377240496476148, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4660076192433278, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2055,7 +2059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 510281920}
   _count: 2
-  _timer: 30
+  _timer: 40
 --- !u!4 &1056421452
 Transform:
   m_ObjectHideFlags: 0
@@ -2333,7 +2337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 574475318}
   _count: 2
-  _timer: 20
+  _timer: 30
 --- !u!4 &1446606780
 Transform:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ public class SpawnPoint : MonoBehaviour
         for (int i = 0; i < _count; i++)
         {
             //var random = new System.Random();
-            StartCoroutine(Spawn(UnityEngine.Random.Range(0f, _timer)));
+            StartCoroutine(Spawn(UnityEngine.Random.Range(8.0f, _timer)));
         }
     }
 
@@ -51,6 +51,16 @@ public class SpawnPoint : MonoBehaviour
                 dialog_id = 1;
             if (_enemyPrefab.name == "Enemy_clock")
                 dialog_id = 2;
+            if (_enemyPrefab.name == "Enemy_heart")
+                dialog_id = 3;
+            if (_enemyPrefab.name == "Enemy_finger")
+                dialog_id = 4;
+            if (_enemyPrefab.name == "Enemy_clown")
+                dialog_id = 5;
+            if (_enemyPrefab.name == "Enemy_broccoli")
+                dialog_id = 6;
+            if (_enemyPrefab.name == "Boss")
+                dialog_id = 7;
             _uiController.OnSpawned(dialog_id);
         }
     }

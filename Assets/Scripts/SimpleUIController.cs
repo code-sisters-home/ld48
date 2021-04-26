@@ -78,10 +78,11 @@ public class SimpleUIController : MonoBehaviour
     private void ShowDialog(int index)
     {
         //hide other dialogs
-        for (int i = 0; i < _levels.Length; i++)
+        for (int i = 0; i < _dialogs.Length; i++)
         {
             _dialogs[i].SetActive(false);
         }
+
         //show dialog by index
         _dialogs[index].SetActive(true);
     }
